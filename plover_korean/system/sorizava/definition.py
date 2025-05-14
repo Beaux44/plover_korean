@@ -2,29 +2,24 @@
 
 from typing import Tuple, Dict, List, Optional
 
-
+# fmt: off
 # Consonant groups don't internally follow a steno order when constructing words.
 KEYS: Tuple[str] = (
-    # 초성 - Initial consonant (except ㅢ as an out of place vowel)
+    # 초성 - Initial consonant
     'ㅊ-', 'ㅌ-', 'ㅋ-', 'ㅂ-', 'ㅍ-',
-    'ㅅ-', 'ㄷ-', 'ㅈ-', 'ㄱ-', 'ㅋ-',
-    'ㅁ-', 'ㄹ-', 'ㄴ-', 'ㅎ-', 'ㅢ-',
+    'ㅅ-', 'ㄷ-', 'ㅈ-', 'ㄱ-', # '-ㅋ',
+    'ㅁ-', 'ㄹ-', 'ㄴ-', 'ㅎ-', # 'ㅢ-',
 
     # 중성 - Medial vowel
+    'ㅢ-',
     'ㅗ-', 'ㅏ-', 'ㅜ-',
     '-ㅡ', '-ㅓ', '-ㅣ',
 
     # 종성 - Final consonant
+    '-ㅋ',
     '-ㄲ', '-ㅎ', '-ㅌ', '-ㅊ', '-ㅍ',
     '-ㄱ', '-ㄴ', '-ㄹ', '-ㅅ', '-ㅂ',
     '-ㅆ', '-ㅇ', '-ㅁ', '-ㄷ', '-ㅈ',
-
-    # Numbers
-    '-1', '-2', '-3', '-4', '-5', '-6', '-7', '-8', '-9', '-0',
-
-    # Space key. This isn't actually in any strokes but all spacing is either
-    # in the dictionary entries or explicit with the use of a separate key?
-    '*'
 )
 
 IMPLICIT_HYPHEN_KEYS: Tuple[str] = (
@@ -46,7 +41,6 @@ ORTHOGRAPHY_RULES: List[Tuple[str, str]] = []
 ORTHOGRAPHY_RULES_ALIASES: Dict[str, str] = {}
 ORTHOGRAPHY_WORDLIST: Optional[str] = None
 
-# TODO: Figure out how to handle the duplicate ㅋ keys, or if it's even needed.
 KEYMAPS: Dict[str, Dict[str, Tuple[str]]] = {
     'Keyboard': {
         'ㅊ-': '1',
@@ -59,7 +53,7 @@ KEYMAPS: Dict[str, Dict[str, Tuple[str]]] = {
         'ㄷ-': 'w',
         'ㅈ-': 'e',
         'ㄱ-': 'r',
-        'ㅋ-': 't',
+        '-ㅋ': 't',
 
         'ㅁ-': 'a',
         'ㄹ-': 's',
@@ -94,21 +88,56 @@ KEYMAPS: Dict[str, Dict[str, Tuple[str]]] = {
         '-ㄷ': 'l',
         '-ㅈ': ';',
 
-        '-1': 'F1',
-        '-2': 'F2',
-        '-3': 'F3',
-        '-4': 'F4',
-        '-5': 'F5',
-        '-6': 'F6',
-        '-7': 'F7',
-        '-8': 'F8',
-        '-9': 'F9',
-        '-0': 'F10',
-
-        '*': 'space',
-
         'arpeggiate': 'b',
         'no-op': ()
+    },
+    'Gemini PR': {
+        'ㅊ-': '#2',
+        'ㅌ-': '#3',
+        'ㅋ-': '#4',
+        'ㅂ-': '#5',
+        'ㅍ-': '#6',
+
+        'ㅅ-': 'S1-',
+        'ㄷ-': 'T-',
+        'ㅈ-': 'P-',
+        'ㄱ-': 'H-',
+        '-ㅋ': '*1',
+
+        'ㅁ-': 'S2-',
+        'ㄹ-': 'K-',
+        'ㄴ-': 'W-',
+        'ㅎ-': 'R-',
+        'ㅢ-': '*3',
+
+        'ㅗ-': 'Fn',
+        'ㅏ-': 'A-',
+        'ㅜ-': 'O-',
+
+
+        '-ㅡ': '-E',
+        '-ㅓ': '-U',
+        '-ㅣ': 'pwr',
+
+        '-ㄲ': '#7',
+        '-ㅎ': '#8',
+        '-ㅌ': '#9',
+        '-ㅊ': '#A',
+        '-ㅍ': '#B',
+
+        '-ㄱ': '*2',
+        '-ㄴ': '-F',
+        '-ㄹ': '-P',
+        '-ㅅ': '-L',
+        '-ㅂ': '-T',
+
+        '-ㅆ': '*4',
+        '-ㅇ': '-R',
+        '-ㅁ': '-B',
+        '-ㄷ': '-G',
+        '-ㅈ': '-S',
+
+        'no-op': ('#1', '#C', 'res1', 'res2')
     }
 }
 
